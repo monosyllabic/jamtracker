@@ -21,15 +21,16 @@ ActiveRecord::Schema.define(:version => 20130612233147) do
 
   create_table "jams", :force => true do |t|
     t.integer  "artist_id"
-    t.string   "jam_external_id"
-    t.string   "jam_username"
-    t.string   "jam_title"
     t.string   "jam_artist_name"
+    t.datetime "jam_creation_date"
+    t.string   "jam_external_id"
+    t.string   "jam_title"
+    t.string   "jam_username"
     t.string   "jam_via"
     t.string   "jam_via_url"
-    t.datetime "jam_creation_date"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.boolean  "removed",           :default => false
+    t.datetime "created_at",                           :null => false
+    t.datetime "updated_at",                           :null => false
   end
 
   add_index "jams", ["artist_id", "created_at"], :name => "index_jams_on_artist_id_and_created_at"

@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <% @newJamsByArtist.keys.each do |artist| %>
 
 <h2>Results of sync for <%= artist.name %></h2>
@@ -9,7 +7,7 @@
 New jams discovered:<br/>
 
 <% @newJamsByArtist[artist].each do |jam| %>
-	<%= jam.jam_creation_date %>: <%= jam.jam_username %> jammed <%= jam.jam_title %><BR/>
+	<%= jam.jam_creation_date.strftime("%B %e, %Y at %I:%M%p") %>: <A href="http://thisismyjam.com/<%= jam.jam_username %>"><%= jam.jam_username %></a> jammed "<%= jam.jam_title %>" <%= link_to '(remove)', :controller => 'jams', :action => 'remove', :id => jam.id %><BR/>
 <% end %>
 
 <% else %>
@@ -23,4 +21,4 @@ No new jams discovered.<br/>
 <% end %>
 
 <BR/>
-<%= link_to 'Back', artists_path %>
+<%= link_to 'Back', root_path %>

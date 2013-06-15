@@ -1,6 +1,10 @@
 Jamtracker::Application.routes.draw do
-  resources :jams
-
+  resources :jams do
+    member do
+      get :remove
+    end
+  end
+  
   resources :artists do
     collection do 
       get :sync_all

@@ -1,5 +1,3 @@
-require 'thisismyjam'
-
 class ArtistsController < ApplicationController
   # GET /artists
   # GET /artists.json
@@ -46,7 +44,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       if @artist.save
-        format.html { redirect_to @artist, notice: 'Artist was successfully created.' }
+        format.html { redirect_to :root, notice: 'Artist was successfully created.' }
         format.json { render json: @artist, status: :created, location: @artist }
       else
         format.html { render action: "new" }
@@ -62,7 +60,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       if @artist.update_attributes(params[:artist])
-        format.html { redirect_to @artist, notice: 'Artist was successfully updated.' }
+        format.html { redirect_to :root, notice: 'Artist was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -87,7 +85,7 @@ class ArtistsController < ApplicationController
   # GET /artists/1/sync.json
   def sync
     @artist = Artist.find(params[:id])
-    @newJams = sync_inner(@artist)
+    @newJams = @artist.sync
     respond_to do |format|
       format.html # sync.html.erb
       format.json { render json: { @artist => @newJams } }
@@ -97,25 +95,10 @@ class ArtistsController < ApplicationController
   # GET /artists/sync_all
   # GET /artists/sync_all.json
   def sync_all
-    @artists = Artist.all
-    @newJamsByArtist = {}
-    @artists.each { |artist| @newJamsByArtist[artist] = sync_inner(artist) }
+    @newJamsByArtist = Artist.sync_all
     respond_to do |format|
       format.html # sync_all.html.erb
       format.json { render json: @newJamsByArtist }
     end   
-  end
-
-  def sync_inner(artist)
-    newJams = Array.new
-    searchResults = Thisismyjam.searchByArtist(artist.name)["jams"].find_all{ |jam| jam["artist"].casecmp(artist.name) == 0 }
-    searchResults.each do |result|
-      unless Jam.find_by_jam_external_id(result["id"])
-        newJam = artist.jams.new({ jam_artist_name: result["artist"], jam_creation_date: Time.parse(result["creationDate"]), jam_username: result["from"], jam_external_id: result["id"], jam_title: result["title"], jam_via: result["via"], jam_via_url: result["viaUrl"] })
-        newJam.save
-        newJams.push(newJam)
-      end
-    end
-    return newJams
   end
 end
