@@ -1,0 +1,49 @@
+<%= form_for(@jam) do |f| %>
+  <% if @jam.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@jam.errors.count, "error") %> prohibited this jam from being saved:</h2>
+
+      <ul>
+      <% @jam.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :band_id %><br />
+    <%= f.number_field :band_id %>
+  </div>
+  <div class="field">
+    <%= f.label :jam_id %><br />
+    <%= f.number_field :jam_id %>
+  </div>
+  <div class="field">
+    <%= f.label :from %><br />
+    <%= f.text_field :from %>
+  </div>
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :artist %><br />
+    <%= f.text_field :artist %>
+  </div>
+  <div class="field">
+    <%= f.label :via %><br />
+    <%= f.text_field :via %>
+  </div>
+  <div class="field">
+    <%= f.label :via_url %><br />
+    <%= f.text_field :via_url %>
+  </div>
+  <div class="field">
+    <%= f.label :creation_date %><br />
+    <%= f.date_select :creation_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

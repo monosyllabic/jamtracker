@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<% @newJamsByArtist.keys.each do |artist| %>
+
+<h2>Results of sync for <%= artist.name %></h2>
+
+<% if @newJamsByArtist[artist].any? then %>
+
+New jams discovered:<br/>
+
+<% @newJamsByArtist[artist].each do |jam| %>
+	<%= jam.jam_creation_date %>: <%= jam.jam_username %> jammed <%= jam.jam_title %><BR/>
+<% end %>
+
+<% else %>
+
+No new jams discovered.<br/>
+
+<% end %>
+
+<BR/>
+
+<% end %>
+
+<BR/>
+<%= link_to 'Back', artists_path %>

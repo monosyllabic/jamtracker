@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Band:</b>
+  <%= @jam.band_id %>
+</p>
+
+<p>
+  <b>Jam:</b>
+  <%= @jam.jam_id %>
+</p>
+
+<p>
+  <b>From:</b>
+  <%= @jam.from %>
+</p>
+
+<p>
+  <b>Title:</b>
+  <%= @jam.title %>
+</p>
+
+<p>
+  <b>Artist:</b>
+  <%= @jam.artist %>
+</p>
+
+<p>
+  <b>Via:</b>
+  <%= @jam.via %>
+</p>
+
+<p>
+  <b>Via url:</b>
+  <%= @jam.via_url %>
+</p>
+
+<p>
+  <b>Creation date:</b>
+  <%= @jam.creation_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_jam_path(@jam) %> |
+<%= link_to 'Back', jams_path %>
