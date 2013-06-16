@@ -1,32 +1,27 @@
-Jamtracker: a companion app to thisismyjam.com that tracks jams by artist over time.
+=== Jamtracker
 
-thisismyjam.com is a social network app that allows users to select an audio file (usually a song that exists elsewhere on the web, i.e. on youtube, bandcamp, soundcloud, etc.) as their current "jam" to share with their friends. Its functionality is currently fairly limited, especially with respect to public access to sitewide statistics; for instance, users can view their past jams and the past jams of other users, but can not easily 
+Jamtracker is a companion app to thisismyjam.com that displays jams by artist.
 
- Jamtracker aims to remedy 
+thisismyjam.com is a social network app that allows users to select an audio file (usually a song that exists elsewhere on the web, i.e. on youtube, bandcamp, soundcloud, etc.) as their current "jam" to share with their friends. Its functionality is currently fairly limited, especially with respect to easy access to sitewide historical statistics. Jamtracker provides a way to view jams by artist instead of by user, and stores jam data itself so that it can provide artist-centric statistics over time.
 
-Known external limitations
+=== Known external limitations
 
-Jamtracker depends on thisismyjam users correctly labeling their jams. If users misspell an artist's name or misattribute a song while creating their jams, Jamtracker will be unable to identify a jam as belonging to a tracked artist.
+Jamtracker's effectiveness depends on thisismyjam users correctly labeling their jams. If users misspell an artist's name or misattribute a song while creating their jams, Jamtracker will be unable to identify a jam as belonging to a tracked artist.
 
-Jamtracker also depends on thisismyjam's API call to 
+Jamtracker also depends on thisismyjam's API search to find new jams, which does not appear to employ a strict search functionality; searches commonly return jams that are obviously not by the searched-for artist, but instead are "similar" to the artist. Searches also do not appear to always return every jam by an artist.
 
-
-Current functionality:
+=== Current functionality
 
 - Add a new artist to track.
 - "Sync" an artist by searching thisismyjam for new jams by the artist that jamtracker does not yet know about.
 - View tracked jams of an artist by date.
-- Remove a specific jam from the tracker. (Removing does not completely delete the jam from jamtracker, as jamtracker must still 
+- Remove a specific jam from the tracker. (Removing does not completely delete the jam, as jamtracker must still know about the jam in order to ignore it when the artist is next synched.)
 - All artists are automatically synched once a day.
 
-Proposed future functionality:
+=== Proposed future functionality
 
 - Keep track of the last time an artist was synched.
 - Attempt to automatically verify that retrieved jams are correct and highlight those jams that may be incorrect.
 - "Unremove" jams.
-- Deactivate/reactivate an artist. Deactivation means that syncs are no longer automatically performed for that artist.
-- Artist aliases.
-
-
-
-
+- Deactivate/reactivate an artist. Syncs are not be automatically performed for deactivated artists.
+- Artist aliases. Currently, the way jamtracker identifies that a jam is by an artist is if the artist's name as jamtracker knows it is a case-insensitive string match to the artist's name on the jam. For instance, if jamtracker is tracking "Pixies", it will not retrieve jams attributed to "The Pixies". 

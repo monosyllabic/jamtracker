@@ -44,6 +44,7 @@ class ArtistsController < ApplicationController
 
     respond_to do |format|
       if @artist.save
+        @artist.sync
         format.html { redirect_to :root, notice: 'Artist was successfully created.' }
         format.json { render json: @artist, status: :created, location: @artist }
       else
