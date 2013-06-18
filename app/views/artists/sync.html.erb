@@ -2,7 +2,7 @@
 
 <% if @newJams.any? then %>
 
-New jams discovered:
+New jams discovered:<br/>
 
 <% @newJams.each do |jam| %>
 	<%= jam.jam_creation_date.strftime("%B %e, %Y at %I:%M%p") %>: <A href="http://thisismyjam.com/<%= jam.jam_username %>"><%= jam.jam_username %></a> jammed "<%= jam.jam_title %>" <%= link_to '(remove)', :controller => 'jams', :action => 'remove', :id => jam.id %><BR/>
