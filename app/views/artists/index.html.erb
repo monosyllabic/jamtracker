@@ -9,7 +9,7 @@
 <% @artists.each do |artist| %>
 	<h2><%= artist.name %></h2>
 
-	Last synched <%= artist.last_synched.strftime("%B %e, %Y at %I:%M%p") %> | <%= link_to 'Sync Now', sync_artist_path(artist) %> | <%= link_to 'Edit', edit_artist_path(artist) %> | <%= link_to 'Delete', artist, method: :delete, data: { confirm: 'Deleting an artist will discard all jam data related to that artist. Are you sure?' } %><br/><br/>
+	Last synched <%= Time.parse(artist.last_synched).strftime("%B %e, %Y at %I:%M%p") %> | <%= link_to 'Sync Now', sync_artist_path(artist) %> | <%= link_to 'Edit', edit_artist_path(artist) %> | <%= link_to 'Delete', artist, method: :delete, data: { confirm: 'Deleting an artist will discard all jam data related to that artist. Are you sure?' } %><br/><br/>
 
 	<% artist.jams.order("jam_creation_date").reverse.select {|j| !j.removed }.each do |jam| %>
 		<%= jam.jam_creation_date.strftime("%B %e, %Y at %I:%M%p") %>: <A href="http://thisismyjam.com/<%= jam.jam_username %>"><%= jam.jam_username %></a> jammed "<%= jam.jam_title %>" <%= link_to '(remove)', :controller => 'jams', :action => 'remove', :id => jam.id %><BR/>
