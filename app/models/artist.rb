@@ -1,5 +1,5 @@
 class Artist < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :last_synched
   validates :name, :presence => true, :uniqueness => {:case_sensitive => false}
   has_many :jams, :dependent => :delete_all
 
@@ -19,6 +19,8 @@ class Artist < ActiveRecord::Base
         newJams.push(newJam)
       end
     end
+    self.last_synched = Time.now
+    self.save
     return newJams
   end
 end

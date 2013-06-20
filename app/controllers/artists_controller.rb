@@ -77,7 +77,7 @@ class ArtistsController < ApplicationController
     @artist.destroy
 
     respond_to do |format|
-      format.html { redirect_to artists_url }
+      format.html { redirect_to :root }
       format.json { head :no_content }
     end
   end
